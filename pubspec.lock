@@ -240,6 +240,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  hex:
+    dependency: transitive
+    description:
+      name: hex
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   http:
     dependency: "direct main"
     description:
@@ -532,6 +539,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  wallet_connect:
+    dependency: "direct overridden"
+    description:
+      name: wallet_connect
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   walletconnect_dart:
     dependency: transitive
     description:

@@ -62,10 +62,10 @@ class Web3LinkingProvider extends ChangeNotifier {
   }
 
   Future<void> getCredentials() async {
-    _credentials = _web3connect?.credentials;
-    // _credentials = EthPrivateKey.fromHex(ganacheAccount2PrivateKey);
-    _walletAddress = EthereumAddress.fromHex(_web3connect!.account);
-    // _walletAddress = await _credentials!.extractAddress();
+    // _credentials = _web3connect?.credentials;
+    _credentials = EthPrivateKey.fromHex(metamaskAccountPrivateKey);
+    // _walletAddress = EthereumAddress.fromHex(_web3connect!.account);
+    _walletAddress = await _credentials!.extractAddress();
     debugPrint('Credentials ${_credentials.toString()}');
     debugPrint('Wallet Address ${_walletAddress.toString()}');
     notifyListeners();
