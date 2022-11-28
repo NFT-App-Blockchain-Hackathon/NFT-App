@@ -13,8 +13,10 @@ class IpfsMetadataUploadService {
         'Content-Type': "application/json",
         'Authorization': nftPortApiKey,
       },
+      // body:
+      //     "{\n  \"name\": \"${Provider.of<Web3LinkingProvider>(context, listen: false).getTitle()}\",\n  \"description\": \"${Provider.of<Web3LinkingProvider>(context, listen: false).getDescription()}\",\n  \"file_url\": \"https://ipfs.io/ipfs/${Provider.of<Web3LinkingProvider>(context, listen: false).getImageCid()}\"\n}",
       body:
-          "{\n  \"name\": \"Sydney Sweeny Test NFT\",\n  \"description\": \"Sydney Sweeny Sexy\",\n  \"file_url\": \"https://ipfs.io/ipfs/${Provider.of<Web3LinkingProvider>(context, listen: false).getImageCid()}\"\n}",
+      "{\n  \"name\": \"Test NFT\",\n  \"description\": \"Blockchain Hackathon\",\n  \"file_url\": \"https://ipfs.io/ipfs/${Provider.of<Web3LinkingProvider>(context, listen: false).getImageCid()}\"\n}",
     );
     final data = jsonDecode(response.body);
     final metadataCid = data["metadata_uri"].substring(7);

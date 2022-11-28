@@ -4,12 +4,12 @@ import 'package:nft_app_test/components/button.dart';
 import 'package:provider/provider.dart';
 import 'package:nft_app_test/providers/web3_linking_provider.dart';
 
-class PopUp extends StatefulWidget {
+class PopUpTitle extends StatefulWidget {
   @override
-  State<PopUp> createState() => _PopUpState();
+  State<PopUpTitle> createState() => _PopUpTitleState();
 }
 
-class _PopUpState extends State<PopUp> {
+class _PopUpTitleState extends State<PopUpTitle> {
   final _textEditingController = TextEditingController();
 
   late String title;
@@ -55,6 +55,12 @@ class _PopUpState extends State<PopUp> {
                 fontWeight: FontWeight.w300,
                 color: Colors.white,
               ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
+              ),
             ),
           ),
           const SizedBox(height: 20.0),
@@ -65,10 +71,12 @@ class _PopUpState extends State<PopUp> {
                     .setTitle(
                   title,
                 );
+                print('Title');
                 print(
                   Provider.of<Web3LinkingProvider>(context, listen: false)
                       .getTitle(),
                 );
+                Navigator.pop(context);
               },
               title: 'Submit'),
         ],

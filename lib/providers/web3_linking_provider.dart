@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:flutter/services.dart';
 import 'package:nft_app_test/constants.dart';
+import 'package:nft_app_test/services/ipfs_metadata_upload_service.dart';
 import 'package:web3_connect/web3_connect.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';
@@ -20,6 +21,8 @@ class Web3LinkingProvider extends ChangeNotifier {
   String? _imageCid;
   String? _metadataCid;
   String? _metadataUri;
+  String? _title;
+  String? _description;
   // String? _deployedName;
   Web3Client? _web3client;
   Web3Connect? _web3connect;
@@ -81,6 +84,7 @@ class Web3LinkingProvider extends ChangeNotifier {
 
   safeMint(BuildContext context) async {
     isLoading = true;
+    // await IpfsMetadataUploadService();
     await _web3client!.sendTransaction(
       _credentials!,
       Transaction.callContract(
@@ -92,6 +96,12 @@ class Web3LinkingProvider extends ChangeNotifier {
     );
     isLoading = false;
     debugPrint('NFT minted');
+    notifyListeners();
+  }
+
+  Future<void> getWalletBalance() async {
+    _walletBalance = await _web3client?.getBalance(_walletAddress!);
+    debugPrint('Balance $_walletBalance');
     notifyListeners();
   }
 
@@ -110,12 +120,34 @@ class Web3LinkingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  setTitle(String title) {
+    _title = title;
+    notifyListeners();
+  }
+
+  setDescription(String description) {
+    _description = description;
+    notifyListeners();
+  }
+
   getImageCid() {
     return _imageCid;
   }
 
   getMetadataCid() {
     return _metadataCid;
+  }
+
+  getWalletAddress() {
+    return _walletAddress;
+  }
+
+  getTitle() {
+    return _title;
+  }
+
+  getDescription() {
+    return _description;
   }
 
   connectMetaMask() async {
@@ -125,12 +157,6 @@ class Web3LinkingProvider extends ChangeNotifier {
 
   disconnectMetaMask() async {
     await _web3connect?.disconnect();
-    notifyListeners();
-  }
-
-  Future<void> getWalletBalance() async {
-    _walletBalance = await _web3client?.getBalance(_walletAddress!);
-    debugPrint('Balance $_walletBalance');
     notifyListeners();
   }
 }

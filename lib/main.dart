@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nft_app_test/screens/home_screen.dart';
+import 'package:nft_app_test/screens/welcome_screen.dart';
 import 'package:nft_app_test/services/ipfs_metadata_upload_service.dart';
 import 'package:provider/provider.dart';
 import 'providers/web3_linking_provider.dart';
@@ -17,11 +19,17 @@ class MyApp extends StatelessWidget {
       create: (context) => Web3LinkingProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'NFT App',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const NftAppTest(),
+        initialRoute: WelcomeScreen.id,
+        routes: {
+          WelcomeScreen.id : (context) => WelcomeScreen(),
+          HomeScreen.id : (context) => HomeScreen(),
+          NftAppTest.id : (context) => NftAppTest(),
+        },
+        home: const WelcomeScreen(),
       ),
     );
   }
@@ -29,6 +37,8 @@ class MyApp extends StatelessWidget {
 
 class NftAppTest extends StatefulWidget {
   const NftAppTest({Key? key}) : super(key: key);
+  static String id = 'main';
+
 
   @override
   State<NftAppTest> createState() => _NftAppTestState();
